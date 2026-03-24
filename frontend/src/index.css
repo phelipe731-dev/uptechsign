@@ -7,6 +7,7 @@
   --brand-orange-soft: #FFF7ED;
   --brand-black: #000000;
   --brand-text: #4A5568;
+  --brand-text-soft: #94A3B8;
   --brand-bg: #F7F9FC;
   --brand-border: #E6EAF0;
   --brand-white: #FFFFFF;
@@ -20,8 +21,13 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: var(--brand-text);
   background: var(--brand-bg);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 .brand-panel {
@@ -47,4 +53,49 @@ body {
 .texture-strip {
   height: 1px;
   background: var(--brand-border);
+}
+
+.app-card {
+  border: 1px solid var(--brand-border);
+  background: var(--brand-white);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.app-card-soft {
+  border: 1px solid var(--brand-border);
+  background: #fbfcfe;
+  border-radius: 12px;
+}
+
+.app-button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  background: var(--brand-orange);
+  color: white;
+  transition: background-color 150ms ease;
+}
+
+.app-button-primary:hover {
+  background: var(--brand-orange-hover);
+}
+
+.app-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--brand-border);
+  background: white;
+  color: var(--brand-text);
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.app-button-secondary:hover {
+  background: var(--brand-hover);
+  border-color: #d7dee8;
 }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Activity,
   AlertCircle,
+  ArrowRight,
   CheckCircle,
   ChevronDown,
   ChevronUp,
@@ -11,7 +12,8 @@ import {
   FolderOpen,
   Plus,
   Send,
-  Upload,
+  ShieldCheck,
+  Sparkles,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useDocuments } from "../hooks/useDocuments";
@@ -179,37 +181,101 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="mx-auto max-w-[1440px] p-8">
-      {/* Header */}
-      <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <h1 className="text-xl font-bold text-[#000]">Painel de documentos</h1>
-          <p className="mt-1 text-sm text-[#4A5568]">
-            Acompanhe rascunhos, envios em andamento e atividade recente do escritorio.
+    <div className="mx-auto max-w-[1440px] px-6 py-8 lg:px-8">
+      <section className="mb-8 grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_360px]">
+        <div className="rounded-[18px] border border-[#E6EAF0] bg-white p-8">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#FDE7B3] bg-[#FFF7ED] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-[#D97706]">
+            <Sparkles size={14} />
+            Operacao central
+          </div>
+          <h2 className="mt-5 max-w-3xl text-[32px] font-semibold leading-tight tracking-[-0.03em] text-[#000000]">
+            Um painel clean para gerar, enviar e acompanhar documentos sem friccao.
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-[#4A5568]">
+            Reuna templates, rascunhos, assinaturas e trilhas de auditoria em uma
+            experiencia mais clara, corporativa e previsivel para o escritorio.
           </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              to="/documents/new"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#F59E0B] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#D97706]"
+            >
+              <Plus size={16} />
+              Criar novo documento
+            </Link>
+            <Link
+              to="/documents"
+              className="inline-flex items-center gap-2 rounded-lg border border-[#E6EAF0] bg-white px-5 py-3 text-sm font-medium text-[#4A5568] transition-colors hover:bg-[#F9FAFB]"
+            >
+              <FolderOpen size={16} />
+              Abrir base documental
+            </Link>
+          </div>
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          <Link
-            to="/documents/new"
-            className="inline-flex items-center gap-2 rounded-lg bg-[#F59E0B] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#D97706]"
-          >
-            <Plus size={16} />
-            Novo documento
-          </Link>
-          <Link
-            to="/templates"
-            className="inline-flex items-center gap-2 rounded-lg border border-[#E6EAF0] bg-white px-5 py-2.5 text-sm font-medium text-[#4A5568] transition-colors hover:bg-[#F9FAFB]"
-          >
-            <Upload size={16} />
-            Templates
-          </Link>
-        </div>
-      </div>
+        <div className="rounded-[18px] border border-[#E6EAF0] bg-white p-6">
+          <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#A0AEC0]">
+            Resumo rapido
+          </div>
+          <h3 className="mt-2 text-xl font-semibold text-[#000000]">
+            O que precisa de atencao agora
+          </h3>
+          <div className="mt-6 grid gap-3">
+            <div className="rounded-2xl border border-[#E6EAF0] bg-[#FBFCFE] p-4">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <div className="text-sm font-medium text-[#111827]">
+                    Documentos em curso
+                  </div>
+                  <div className="mt-1 text-xs text-[#4A5568]">
+                    Fluxos com assinaturas ainda em andamento.
+                  </div>
+                </div>
+                <div className="rounded-xl bg-[#FFF7ED] px-3 py-2 text-lg font-semibold text-[#D97706]">
+                  {stats?.in_signing ?? 0}
+                </div>
+              </div>
+            </div>
 
-      {/* Stat cards */}
+            <div className="rounded-2xl border border-[#E6EAF0] bg-[#FBFCFE] p-4">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <div className="text-sm font-medium text-[#111827]">
+                    Envios aguardando retorno
+                  </div>
+                  <div className="mt-1 text-xs text-[#4A5568]">
+                    Links ja enviados e pendentes de acao do signatario.
+                  </div>
+                </div>
+                <div className="rounded-xl bg-[#F7F9FC] px-3 py-2 text-lg font-semibold text-[#4A5568]">
+                  {stats?.sent ?? 0}
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-[#E6EAF0] bg-[#FFF7ED] p-4">
+              <div className="flex items-start gap-3">
+                <div className="rounded-xl bg-white p-2 text-[#F59E0B]">
+                  <ShieldCheck size={18} />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-[#111827]">
+                    Painel pronto para operacao continua
+                  </div>
+                  <div className="mt-1 text-xs leading-6 text-[#4A5568]">
+                    Visualizacao central de desempenho, pendencias e atividade
+                    recente com destaque sempre em laranja.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {stats && (
-        <div className="mb-8 grid gap-4 md:grid-cols-4">
+        <div className="mb-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {statCards.map(({ key, cfg }) => {
             const Icon = cfg.icon;
             const count = stats[key] as number;
@@ -217,15 +283,24 @@ export default function Dashboard() {
               <Link
                 key={key}
                 to={`/documents?status=${key}`}
-                className={`rounded-[10px] border border-[#E6EAF0] border-l-4 ${cfg.borderColor} bg-white p-5 transition-shadow hover:shadow-[0_1px_4px_rgba(0,0,0,0.06)]`}
+                className={`rounded-[16px] border border-[#E6EAF0] border-l-4 ${cfg.borderColor} bg-white p-5 transition-all hover:border-[#F3D9A4] hover:bg-[#FFFCF7]`}
               >
-                <div className="flex items-center gap-3">
-                  <div className={`rounded-lg p-2 ${cfg.bgColor}`}>
+                <div className="flex items-start justify-between gap-4">
+                  <div className={`rounded-xl p-3 ${cfg.bgColor}`}>
                     <Icon size={18} className={cfg.iconColor} />
                   </div>
-                  <div>
-                    <div className={`text-2xl font-bold ${cfg.textColor}`}>{count}</div>
-                    <div className="text-xs text-[#A0AEC0]">{cfg.label}</div>
+                  <ArrowRight size={16} className="text-[#CBD5E1]" />
+                </div>
+                <div className="mt-5">
+                  <div className={`text-3xl font-semibold tracking-tight ${cfg.textColor}`}>
+                    {count}
+                  </div>
+                  <div className="mt-1 text-sm font-medium text-[#111827]">{cfg.label}</div>
+                  <div className="mt-2 text-xs leading-5 text-[#94A3B8]">
+                    {key === "completed" && "Documentos finalizados e fechados com sucesso."}
+                    {key === "in_signing" && "Fluxos aguardando conclusao das assinaturas."}
+                    {key === "refused" && "Itens recusados que merecem nova abordagem."}
+                    {key === "sent" && "Links enviados e aguardando a primeira acao."}
                   </div>
                 </div>
               </Link>
@@ -238,7 +313,7 @@ export default function Dashboard() {
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.4fr)_380px]">
         <div className="space-y-6">
           {/* Recent documents */}
-          <section className="rounded-[10px] border border-[#E6EAF0] bg-white">
+          <section className="rounded-[18px] border border-[#E6EAF0] bg-white">
             <SectionHeader
               title="Documentos recentes"
               icon={<FolderOpen size={16} className="text-[#A0AEC0]" />}
@@ -289,10 +364,12 @@ export default function Dashboard() {
                     <Link
                       key={doc.id}
                       to={`/documents/${doc.id}`}
-                      className="flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-[#F9FAFB]"
+                      className="group flex items-center justify-between gap-4 px-6 py-5 transition-colors hover:bg-[#F9FAFB]"
                     >
                       <div className="min-w-0">
-                        <div className="truncate text-sm font-medium text-[#1A202C]">{doc.title}</div>
+                        <div className="truncate text-[15px] font-medium text-[#111827] transition-colors group-hover:text-[#000000]">
+                          {doc.title}
+                        </div>
                         <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-[#A0AEC0]">
                           <span>{doc.source_type === "manual" ? "PDF manual" : "Template DOCX"}</span>
                           {doc.template_name && (
@@ -318,7 +395,7 @@ export default function Dashboard() {
           </section>
 
           {/* Pending follow-ups */}
-          <section className="rounded-[10px] border border-[#E6EAF0] bg-white">
+          <section className="rounded-[18px] border border-[#E6EAF0] bg-white">
             <SectionHeader
               title="Pendencias de acompanhamento"
               expanded={sectionVisibility.pending}
@@ -349,11 +426,13 @@ export default function Dashboard() {
                   <Link
                     key={item.id}
                     to={`/documents/${item.id}`}
-                    className="block px-5 py-4 transition-colors hover:bg-[#F9FAFB]"
+                    className="block px-6 py-5 transition-colors hover:bg-[#F9FAFB]"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="min-w-0">
-                        <div className="truncate text-sm font-medium text-[#1A202C]">{item.title}</div>
+                        <div className="truncate text-[15px] font-medium text-[#111827]">
+                          {item.title}
+                        </div>
                         <div className="mt-1 text-xs text-[#A0AEC0]">
                           {item.source_type === "manual" ? "PDF manual" : item.template_name || "Template DOCX"}
                         </div>
@@ -392,7 +471,7 @@ export default function Dashboard() {
         </div>
 
         {/* Activity sidebar */}
-        <section className="rounded-[10px] border border-[#E6EAF0] bg-white">
+        <section className="rounded-[18px] border border-[#E6EAF0] bg-white">
           <SectionHeader
             title="Atividade recente"
             icon={<Activity size={16} className="text-[#F59E0B]" />}
@@ -463,13 +542,17 @@ function SectionHeader({
 }) {
   return (
     <div
-      className={`flex items-center justify-between px-5 py-4 ${
+      className={`flex items-center justify-between px-6 py-5 ${
         expanded ? "border-b border-[#F1F5F9]" : ""
       }`}
     >
-      <div className="flex items-center gap-2">
-        {icon}
-        <h2 className="text-sm font-semibold text-[#000]">{title}</h2>
+      <div className="flex items-center gap-3">
+        {icon ? (
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#FFF7ED] text-[#F59E0B]">
+            {icon}
+          </span>
+        ) : null}
+        <h2 className="text-base font-semibold tracking-tight text-[#000]">{title}</h2>
         {meta}
       </div>
 
@@ -478,7 +561,7 @@ function SectionHeader({
         <button
           type="button"
           onClick={onToggle}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-[#E6EAF0] bg-white px-3 py-1.5 text-xs font-medium text-[#4A5568] transition-colors hover:bg-[#F9FAFB]"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-[#E6EAF0] bg-white px-3 py-2 text-xs font-medium text-[#4A5568] transition-colors hover:bg-[#F9FAFB]"
         >
           {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
           {expanded ? "Ocultar" : "Reabrir"}
@@ -489,5 +572,5 @@ function SectionHeader({
 }
 
 function CollapsedNotice({ text }: { text: string }) {
-  return <div className="px-5 py-4 text-xs text-[#A0AEC0]">{text}</div>;
+  return <div className="px-6 py-5 text-xs text-[#A0AEC0]">{text}</div>;
 }
