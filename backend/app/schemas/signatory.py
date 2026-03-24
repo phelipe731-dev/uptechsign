@@ -85,6 +85,7 @@ class SignRequest(BaseModel):
     typed_name: str
     signature_mode: Literal["drawn", "typed"] = "drawn"
     signature_image_base64: Optional[str] = None
+    selfie_image_base64: Optional[str] = None
     field_values: dict[str, str] = Field(default_factory=dict)
     accept_terms: bool = False
 
@@ -94,6 +95,8 @@ class SignRequest(BaseModel):
             raise ValueError("Informe o nome da assinatura.")
         if self.signature_mode == "drawn" and not self.signature_image_base64:
             raise ValueError("Desenhe a assinatura para continuar.")
+        if self.selfie_image_base64 and len(self.selfie_image_base64) > 6_000_000:
+            raise ValueError("A selfie enviada esta muito grande. Tente novamente com uma imagem menor.")
         if not self.accept_terms:
             raise ValueError("Aceite os termos antes de concluir a assinatura.")
         return self

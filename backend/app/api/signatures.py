@@ -401,6 +401,7 @@ async def submit_signature(
     geolocation = lookup_ip_geolocation(ip)
     signature_name = body.typed_name.strip()
     signature_image = body.signature_image_base64 if body.signature_mode == "drawn" else None
+    selfie_image = body.selfie_image_base64.strip() if body.selfie_image_base64 else None
     fields = await _get_signatory_fields(db, str(sig.id))
     provided_field_values = {str(field_id): value.strip() for field_id, value in body.field_values.items()}
 
@@ -433,6 +434,8 @@ async def submit_signature(
             "version": settings.LEGAL_TERMS_VERSION,
             "summary": settings.LEGAL_TERMS_ACCEPTANCE_TEXT,
         },
+        "selfie_image_base64": selfie_image,
+        "selfie_taken_at": now.isoformat() if selfie_image else None,
         "field_values": {
             str(field.id): field.value
             for field in fields
@@ -459,10 +462,21 @@ async def submit_signature(
             "version": settings.LEGAL_TERMS_VERSION,
             "statement": settings.LEGAL_TERMS_ACCEPTANCE_TEXT,
             "signatory_name": sig.name,
+            "selfie_captured": bool(selfie_image),
         },
     )
-    await record_event(db, sig, "signed", ip, ua)
-    await record_audit(db, sig, "signature.signed", ip, ua, {"signatory_name": sig.name})
+    await record_event(db, sig, "signed", ip, ua, {"selfie_captured": bool(selfie_image)})
+    await record_audit(
+        db,
+        sig,
+        "signature.signed",
+        ip,
+        ua,
+        {
+            "signatory_name": sig.name,
+            "selfie_captured": bool(selfie_image),
+        },
+    )
 
     doc.last_activity_at = now
     if doc.status in ("sent", "generated"):

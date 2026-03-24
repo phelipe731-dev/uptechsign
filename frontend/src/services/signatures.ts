@@ -84,6 +84,7 @@ export async function submitSignature(
     typed_name: string;
     signature_mode: "drawn" | "typed";
     signature_image_base64?: string;
+    selfie_image_base64?: string;
     field_values?: Record<string, string>;
     accept_terms: boolean;
   }

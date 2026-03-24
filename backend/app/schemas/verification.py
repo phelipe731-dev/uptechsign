@@ -38,6 +38,7 @@ class VerificationSignatoryResponse(BaseModel):
     signed_at: Optional[datetime] = None
     refused_at: Optional[datetime] = None
     signature_mode: Optional[str] = None
+    selfie_captured: bool = False
     ip_address_at_sign: Optional[str] = None
     user_agent_at_sign: Optional[str] = None
 

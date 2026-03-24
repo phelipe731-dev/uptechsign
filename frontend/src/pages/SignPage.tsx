@@ -15,6 +15,7 @@ import type { PublicDocumentInfo } from "../services/signatures";
 import type { UserSignatureData } from "../types";
 import PublicSigningPdfViewer from "../components/signatures/PublicSigningPdfViewer";
 import SignaturePad from "../components/signatures/SignaturePad";
+import SelfieCapture from "../components/signatures/SelfieCapture";
 import PhSignLogo from "../components/branding/PhSignLogo";
 import PublicLegalFooter from "../components/legal/PublicLegalFooter";
 
@@ -53,6 +54,7 @@ export default function SignPage() {
   const [typedName, setTypedName] = useState("");
   const [signatureMode, setSignatureMode] = useState<SignatureMode>("drawn");
   const [signatureImage, setSignatureImage] = useState("");
+  const [selfieImage, setSelfieImage] = useState("");
   const [savedSignature, setSavedSignature] = useState<UserSignatureData | null>(null);
   const [publicFieldValues, setPublicFieldValues] = useState<Record<string, string>>({});
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -193,11 +195,17 @@ export default function SignPage() {
             ? signatureImage.split(",")[1]
             : signatureImage
           : undefined;
+      const selfieBase64 = selfieImage
+        ? selfieImage.includes(",")
+          ? selfieImage.split(",")[1]
+          : selfieImage
+        : undefined;
 
       await submitSignature(token!, {
         typed_name: typedName.trim(),
         signature_mode: signatureMode,
         signature_image_base64: base64,
+        selfie_image_base64: selfieBase64,
         field_values: publicFieldValues,
         accept_terms: acceptTerms,
       });
@@ -688,6 +696,12 @@ export default function SignPage() {
               </p>
             </div>
           )}
+
+          <SelfieCapture
+            value={selfieImage}
+            onChange={setSelfieImage}
+            disabled={signLoading}
+          />
 
           <div className="flex items-center justify-between pt-2">
             <div className="w-full space-y-4">

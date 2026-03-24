@@ -216,6 +216,7 @@ async def get_verification_details(
             signed_at=signatory.signed_at,
             refused_at=signatory.refused_at,
             signature_mode=(signatory.signature_data or {}).get("signature_mode"),
+            selfie_captured=bool((signatory.signature_data or {}).get("selfie_image_base64")),
             ip_address_at_sign=_restrict_ip(str(signatory.ip_address_at_sign) if signatory.ip_address_at_sign else None),
             user_agent_at_sign=_restrict_user_agent(signatory.user_agent_at_sign),
         )

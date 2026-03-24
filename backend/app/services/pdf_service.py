@@ -311,6 +311,11 @@ def _signature_mode_label(sig: dict) -> str:
     return "-"
 
 
+def _selfie_capture_label(sig: dict) -> str:
+    selfie = (sig.get("signature_data") or {}).get("selfie_image_base64")
+    return "Capturada" if selfie else "Nao coletada"
+
+
 def _terms_acceptance_label(sig: dict) -> str:
     accepted_at = sig.get("terms_accepted_at")
     version = sig.get("accepted_terms_version")
@@ -526,9 +531,14 @@ def _draw_signatory_card(page: fitz.Page, sig: dict, y: float) -> float:
         ),
         (
             ("Modo", _signature_mode_label(sig)),
+            ("Selfie", _selfie_capture_label(sig)),
+        ),
+        (
             ("Aceite", _terms_acceptance_label(sig)),
+            ("Versao dos termos", sig.get("accepted_terms_version") or "-"),
         ),
     ]
+    selfie_image = (sig.get("signature_data") or {}).get("selfie_image_base64")
     card_width = PW - ML - MR
     inner_width = card_width - 20
     column_gap = 14
@@ -557,7 +567,8 @@ def _draw_signatory_card(page: fitz.Page, sig: dict, y: float) -> float:
         auth_height += max(left_height, right_height) + 4
     summary_text = f"Termo de aceite: {_terms_acceptance_summary(sig)}"
     summary_height = _text_block_height(summary_text, inner_width, fontname="helv", fontsize=6.7, line_height=1.12)
-    card_height = top_height + 14 + 14 + auth_height + 8 + summary_height + 10
+    selfie_block_height = 38 if selfie_image else 0
+    card_height = top_height + 14 + 14 + auth_height + selfie_block_height + 8 + summary_height + 10
 
     card_rect = fitz.Rect(ML, y + 10, PW - MR, y + 10 + card_height)
     page.draw_rect(card_rect, color=LGRAY, fill=WHITE, width=0.8)
@@ -682,6 +693,28 @@ def _draw_signatory_card(page: fitz.Page, sig: dict, y: float) -> float:
             line_height=1.16,
         )
         row_y += row_height + 4
+
+    if selfie_image:
+        selfie_label_y = row_y + 8
+        page.insert_text(
+            fitz.Point(card_rect.x0 + 10, selfie_label_y),
+            "Selfie de confirmacao:",
+            fontname="hebo",
+            fontsize=7.8,
+            color=BLACK,
+        )
+        _draw_wrapped_text(
+            page,
+            card_rect.x0 + 10,
+            selfie_label_y + 8,
+            inner_width,
+            "Imagem capturada no momento da assinatura e preservada no ambiente interno como evidencia visual adicional deste ato eletronico.",
+            fontname="helv",
+            fontsize=7.2,
+            color=GRAY,
+            line_height=1.18,
+        )
+        row_y = selfie_label_y + 26
 
     summary_top = row_y + 4
     _draw_wrapped_text(

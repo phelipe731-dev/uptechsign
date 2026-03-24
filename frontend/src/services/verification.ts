@@ -33,6 +33,7 @@ export interface VerificationSignatory {
   signed_at: string | null;
   refused_at: string | null;
   signature_mode: string | null;
+  selfie_captured: boolean;
   ip_address_at_sign: string | null;
   user_agent_at_sign: string | null;
 }

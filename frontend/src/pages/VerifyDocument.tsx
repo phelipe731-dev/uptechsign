@@ -263,6 +263,10 @@ export default function VerifyDocument() {
                     value={signatory.accepted_terms_version || "-"}
                   />
                   <EvidenceItem label="Assinado em" value={formatDateTime(signatory.signed_at)} />
+                  <EvidenceItem
+                    label="Selfie capturada"
+                    value={signatory.selfie_captured ? "Sim" : "Nao"}
+                  />
                   <EvidenceItem label="IP da assinatura" value={signatory.ip_address_at_sign || "-"} />
                   <EvidenceItem label="Modo de assinatura" value={signatory.signature_mode || "-"} />
                   <EvidenceItem
