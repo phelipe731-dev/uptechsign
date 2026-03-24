@@ -21,17 +21,17 @@ export default function PublicLegalFooter({
 
   return (
     <div
-      className={`rounded-2xl border border-[#f0dfac] bg-white/85 text-stone-600 shadow-sm ${
+      className={`rounded-[10px] border border-[#E6EAF0] bg-white text-[#4A5568] ${
         compact ? "px-4 py-4" : "px-6 py-5"
       }`}
     >
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-sm font-semibold text-stone-900">
-            <ShieldCheck size={16} className="text-orange-500" />
+          <div className="flex items-center gap-2 text-sm font-semibold text-[#000]">
+            <ShieldCheck size={16} className="text-[#F59E0B]" />
             {appName}
           </div>
-          <p className="mt-1 text-xs leading-5 text-stone-500">
+          <p className="mt-1 text-xs leading-5 text-[#4A5568]">
             Suporte, privacidade e documentos legais da plataforma.
           </p>
         </div>
@@ -41,7 +41,7 @@ export default function PublicLegalFooter({
             href="/terms"
             target="_blank"
             rel="noreferrer"
-            className="rounded-full bg-[#fff6dc] px-3 py-1.5 text-xs font-medium text-stone-700 transition-colors hover:bg-[#fff0c2]"
+            className="rounded-full bg-[#F7F9FC] px-3 py-1.5 text-xs font-medium text-[#4A5568] transition-colors hover:bg-[#E6EAF0]"
           >
             Termos
           </a>
@@ -49,7 +49,7 @@ export default function PublicLegalFooter({
             href="/privacy"
             target="_blank"
             rel="noreferrer"
-            className="rounded-full bg-[#fff6dc] px-3 py-1.5 text-xs font-medium text-stone-700 transition-colors hover:bg-[#fff0c2]"
+            className="rounded-full bg-[#F7F9FC] px-3 py-1.5 text-xs font-medium text-[#4A5568] transition-colors hover:bg-[#E6EAF0]"
           >
             Privacidade
           </a>
@@ -57,7 +57,7 @@ export default function PublicLegalFooter({
             href="/dpa"
             target="_blank"
             rel="noreferrer"
-            className="rounded-full bg-[#fff6dc] px-3 py-1.5 text-xs font-medium text-stone-700 transition-colors hover:bg-[#fff0c2]"
+            className="rounded-full bg-[#F7F9FC] px-3 py-1.5 text-xs font-medium text-[#4A5568] transition-colors hover:bg-[#E6EAF0]"
           >
             DPA
           </a>
@@ -66,11 +66,11 @@ export default function PublicLegalFooter({
 
       <div className="mt-4 grid gap-3 md:grid-cols-3">
         <InfoItem
-          icon={<Headset size={15} className="text-orange-500" />}
+          icon={<Headset size={15} className="text-[#F59E0B]" />}
           label="Canal de suporte"
           value={
             supportUrl ? (
-              <a href={supportUrl} target="_blank" rel="noreferrer" className="text-orange-600 hover:text-orange-700">
+              <a href={supportUrl} target="_blank" rel="noreferrer" className="text-[#F59E0B] hover:text-[#D97706]">
                 {supportUrl}
               </a>
             ) : (
@@ -79,11 +79,11 @@ export default function PublicLegalFooter({
           }
         />
         <InfoItem
-          icon={<Mail size={15} className="text-orange-500" />}
+          icon={<Mail size={15} className="text-[#F59E0B]" />}
           label="Suporte por e-mail"
           value={
             supportEmail ? (
-              <a href={`mailto:${supportEmail}`} className="text-orange-600 hover:text-orange-700">
+              <a href={`mailto:${supportEmail}`} className="text-[#F59E0B] hover:text-[#D97706]">
                 {supportEmail}
               </a>
             ) : (
@@ -92,11 +92,11 @@ export default function PublicLegalFooter({
           }
         />
         <InfoItem
-          icon={<MessageCircle size={15} className="text-orange-500" />}
+          icon={<MessageCircle size={15} className="text-[#F59E0B]" />}
           label="Contato LGPD / DPA"
           value={
             privacyEmail ? (
-              <a href={`mailto:${privacyEmail}`} className="text-orange-600 hover:text-orange-700">
+              <a href={`mailto:${privacyEmail}`} className="text-[#F59E0B] hover:text-[#D97706]">
                 {privacyEmail}
               </a>
             ) : (
@@ -119,12 +119,12 @@ function InfoItem({
   value: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-[#f4e6ba] bg-[#fffdf7] px-4 py-3">
-      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-stone-400">
+    <div className="rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] px-4 py-3">
+      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#A0AEC0]">
         {icon}
         {label}
       </div>
-      <div className="mt-2 text-sm text-stone-700 break-words">{value}</div>
+      <div className="mt-2 text-sm text-[#4A5568] break-words">{value}</div>
     </div>
   );
 }

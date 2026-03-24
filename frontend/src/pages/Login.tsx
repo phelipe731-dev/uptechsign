@@ -17,25 +17,25 @@ export default function Login() {
         : null;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,#fff5b8,transparent_36%),linear-gradient(180deg,#fffdf7_0%,#fff7e6_100%)] px-6 py-12">
+    <div className="flex min-h-screen items-center justify-center bg-[#F7F9FC] px-6 py-12">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <div className="inline-flex rounded-[28px] border border-white/80 bg-white/80 px-6 py-5 shadow-[0_24px_60px_rgba(23,20,18,0.08)] backdrop-blur">
+          <div className="inline-flex rounded-xl border border-[#E6EAF0] bg-white px-6 py-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
             <PhSignLogo className="h-16 w-auto" />
           </div>
-          <p className="mt-4 text-sm font-medium uppercase tracking-[0.18em] text-stone-500">
+          <p className="mt-4 text-sm font-medium uppercase tracking-[0.18em] text-[#A0AEC0]">
             Plataforma de assinatura digital
           </p>
         </div>
 
-        <div className="brand-panel rounded-[28px] p-8">
-          <h2 className="mb-2 text-lg font-semibold text-stone-900">Entrar</h2>
-          <p className="mb-6 text-sm text-stone-500">
+        <div className="rounded-xl border border-[#E6EAF0] bg-white p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+          <h2 className="mb-2 text-lg font-semibold text-[#000]">Entrar</h2>
+          <p className="mb-6 text-sm text-[#4A5568]">
             Acesse seu ambiente para gerar, enviar e validar documentos.
           </p>
 
           {errorMessage && (
-            <div className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-[#EF4444]">
               {errorMessage}
             </div>
           )}
@@ -48,28 +48,28 @@ export default function Login() {
             className="space-y-5"
           >
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-stone-700">
+              <label className="mb-1.5 block text-sm font-medium text-[#1A202C]">
                 E-mail
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-xl border border-[#e6d7a4] bg-white px-4 py-3 text-stone-900 placeholder-stone-400 transition-colors focus:border-[#ffb31b] focus:outline-none focus:ring-2 focus:ring-[#fff0b8]"
+                className="w-full rounded-lg border border-[#E6EAF0] bg-white px-4 py-3 text-[#1A202C] placeholder-[#A0AEC0] transition-colors focus:border-[#F59E0B] focus:outline-none focus:ring-2 focus:ring-[#FFF7ED]"
                 placeholder="seu@email.com"
                 required
               />
             </div>
 
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-stone-700">
+              <label className="mb-1.5 block text-sm font-medium text-[#1A202C]">
                 Senha
               </label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-xl border border-[#e6d7a4] bg-white px-4 py-3 text-stone-900 placeholder-stone-400 transition-colors focus:border-[#ffb31b] focus:outline-none focus:ring-2 focus:ring-[#fff0b8]"
+                className="w-full rounded-lg border border-[#E6EAF0] bg-white px-4 py-3 text-[#1A202C] placeholder-[#A0AEC0] transition-colors focus:border-[#F59E0B] focus:outline-none focus:ring-2 focus:ring-[#FFF7ED]"
                 placeholder="********"
                 required
               />
@@ -78,7 +78,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loginPending}
-              className="w-full rounded-xl bg-gradient-to-r from-[#ffd92a] to-[#ff9a16] py-3 font-semibold text-[#111111] shadow-[0_18px_30px_rgba(255,178,22,0.22)] transition-opacity hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full rounded-lg bg-[#F59E0B] py-3 font-semibold text-white transition-colors hover:bg-[#D97706] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loginPending ? "Entrando..." : "Entrar"}
             </button>

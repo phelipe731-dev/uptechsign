@@ -31,23 +31,23 @@ const statusMeta: Record<
 > = {
   draft: {
     label: "Rascunho",
-    className: "bg-slate-100 text-slate-700",
+    className: "bg-[#F7F9FC] text-[#A0AEC0]",
   },
   generating: {
     label: "Gerando",
-    className: "bg-amber-100 text-amber-700",
+    className: "bg-[#FFF7ED] text-[#D97706]",
   },
   completed: {
     label: "Concluido",
-    className: "bg-emerald-100 text-emerald-700",
+    className: "bg-green-50 text-[#22C55E]",
   },
   completed_with_errors: {
     label: "Concluido com erros",
-    className: "bg-orange-100 text-orange-700",
+    className: "bg-[#FFF7ED] text-[#D97706]",
   },
   failed: {
     label: "Falhou",
-    className: "bg-red-100 text-red-700",
+    className: "bg-red-50 text-[#EF4444]",
   },
 };
 
@@ -93,22 +93,22 @@ function BatchListCard({
   onSelect: (id: string) => void;
 }) {
   return (
-    <section className="rounded-[28px] border border-[#f2ddb2] bg-white/90 p-6 shadow-[0_22px_50px_rgba(17,17,17,0.04)]">
+    <section className="rounded-[10px] border border-[#E6EAF0] bg-white p-6">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">
+          <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#A0AEC0]">
             Historico
           </div>
-          <h2 className="mt-1 text-xl font-bold text-[#17120e]">Lotes recentes</h2>
+          <h2 className="mt-1 text-xl font-bold text-[#000]">Lotes recentes</h2>
         </div>
-        <div className="rounded-full border border-[#f3dfb1] bg-[#fff8e7] px-3 py-1 text-xs font-semibold text-[#9a5d00]">
+        <div className="rounded-full bg-[#FFF7ED] px-3 py-1 text-xs font-semibold text-[#D97706]">
           {batches.length} lote{batches.length === 1 ? "" : "s"}
         </div>
       </div>
 
       <div className="mt-5 space-y-3">
         {batches.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-[#ead8b1] bg-[#fffdf7] px-4 py-8 text-center text-sm text-stone-500">
+          <div className="rounded-lg border border-dashed border-[#E6EAF0] bg-[#F7F9FC] px-4 py-8 text-center text-sm text-[#4A5568]">
             Nenhum lote importado ainda.
           </div>
         ) : (
@@ -116,16 +116,16 @@ function BatchListCard({
             <button
               key={batch.id}
               onClick={() => onSelect(batch.id)}
-              className={`w-full rounded-2xl border px-4 py-4 text-left transition-all ${
+              className={`w-full rounded-lg border px-4 py-4 text-left transition-all ${
                 selectedBatchId === batch.id
-                  ? "border-[#ffbe45] bg-[#fff5d6] shadow-[0_10px_26px_rgba(255,183,32,0.12)]"
-                  : "border-[#f2e0b6] bg-[#fffdf8] hover:border-[#ffcf71]"
+                  ? "border-[#F59E0B] bg-[#FFF7ED]"
+                  : "border-[#E6EAF0] bg-[#F7F9FC] hover:border-[#F59E0B]"
               }`}
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <div className="truncate text-sm font-semibold text-[#17120e]">{batch.name}</div>
-                  <div className="mt-1 text-xs text-stone-500">
+                  <div className="truncate text-sm font-semibold text-[#000]">{batch.name}</div>
+                  <div className="mt-1 text-xs text-[#4A5568]">
                     {batch.template_name || "Template nao informado"}
                   </div>
                 </div>
@@ -136,17 +136,17 @@ function BatchListCard({
                 </span>
               </div>
 
-              <div className="mt-3 grid grid-cols-3 gap-2 text-xs text-stone-500">
+              <div className="mt-3 grid grid-cols-3 gap-2 text-xs text-[#4A5568]">
                 <div>
-                  <div className="font-semibold text-stone-700">{batch.total_rows}</div>
+                  <div className="font-semibold text-[#1A202C]">{batch.total_rows}</div>
                   <div>linhas</div>
                 </div>
                 <div>
-                  <div className="font-semibold text-emerald-700">{batch.generated_rows}</div>
+                  <div className="font-semibold text-[#22C55E]">{batch.generated_rows}</div>
                   <div>gerados</div>
                 </div>
                 <div>
-                  <div className="font-semibold text-red-600">{batch.failed_rows}</div>
+                  <div className="font-semibold text-[#EF4444]">{batch.failed_rows}</div>
                   <div>erros</div>
                 </div>
               </div>
@@ -254,47 +254,48 @@ export default function Holerites() {
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-8">
-      <div className="rounded-[32px] border border-[#f2ddb2] bg-[radial-gradient(circle_at_top,_rgba(255,212,84,0.24),_rgba(255,255,255,0.96)_52%)] p-8 shadow-[0_24px_60px_rgba(255,183,32,0.12)]">
+      {/* Hero section */}
+      <div className="rounded-[10px] border border-[#E6EAF0] bg-white p-8">
         <div className="flex flex-col gap-8 xl:flex-row xl:items-start xl:justify-between">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#ffd36d] bg-white/85 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-[#9a5d00]">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF7ED] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-[#D97706]">
               <FileSpreadsheet size={14} />
               Modulo de lote
             </div>
-            <h1 className="mt-5 text-4xl font-black tracking-tight text-[#181511]">
+            <h1 className="mt-5 text-4xl font-black tracking-tight text-[#000]">
               Holerites em massa
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-stone-600">
+            <p className="mt-4 max-w-2xl text-base leading-7 text-[#4A5568]">
               Importe um CSV com os colaboradores, mapeie as colunas para o
               template DOCX e gere um pacote ZIP com todos os holerites em PDF.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <div className="inline-flex items-center gap-2 rounded-2xl border border-[#eed8aa] bg-white/85 px-5 py-3 text-sm text-stone-600">
-                <ShieldCheck size={16} className="text-[#f49d16]" />
+              <div className="inline-flex items-center gap-2 rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] px-5 py-3 text-sm text-[#4A5568]">
+                <ShieldCheck size={16} className="text-[#F59E0B]" />
                 Sem calculo de folha dentro da plataforma
               </div>
-              <div className="inline-flex items-center gap-2 rounded-2xl border border-[#eed8aa] bg-white/85 px-5 py-3 text-sm text-stone-600">
-                <Sparkles size={16} className="text-[#f49d16]" />
+              <div className="inline-flex items-center gap-2 rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] px-5 py-3 text-sm text-[#4A5568]">
+                <Sparkles size={16} className="text-[#F59E0B]" />
                 Geracao em massa com ZIP final
               </div>
             </div>
           </div>
 
-          <div className="w-full max-w-md rounded-[28px] border border-[#f0ddb4] bg-white/90 p-6 shadow-[0_20px_50px_rgba(17,17,17,0.06)]">
-            <div className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">
+          <div className="w-full max-w-md rounded-[10px] border border-[#E6EAF0] bg-[#F7F9FC] p-6">
+            <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#A0AEC0]">
               Fluxo MVP
             </div>
-            <div className="mt-4 space-y-3 text-sm leading-6 text-stone-600">
+            <div className="mt-4 space-y-3 text-sm leading-6 text-[#4A5568]">
               <div className="flex items-start gap-3">
-                <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#f49d16]" />
+                <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#F59E0B]" />
                 <span>Template DOCX + CSV com cabecalho.</span>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#f49d16]" />
+                <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#F59E0B]" />
                 <span>Mapeamento por coluna antes da geracao.</span>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#f49d16]" />
+                <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#F59E0B]" />
                 <span>Historico do lote e download final em ZIP.</span>
               </div>
             </div>
@@ -302,41 +303,42 @@ export default function Holerites() {
         </div>
       </div>
 
+      {/* Import + batch list */}
       <div className="mt-8 grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-        <section className="rounded-[28px] border border-[#f2ddb2] bg-white/90 p-6 shadow-[0_22px_50px_rgba(17,17,17,0.04)]">
+        <section className="rounded-[10px] border border-[#E6EAF0] bg-white p-6">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#fff1ca] text-[#f49d16]">
+            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#FFF7ED] text-[#F59E0B]">
               <Upload size={20} />
             </div>
             <div>
-              <div className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">
+              <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#A0AEC0]">
                 Novo lote
               </div>
-              <h2 className="text-xl font-bold text-[#17120e]">Importar base CSV</h2>
+              <h2 className="text-xl font-bold text-[#000]">Importar base CSV</h2>
             </div>
           </div>
 
           <div className="mt-6 space-y-4">
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-stone-700">
+              <label className="mb-1.5 block text-sm font-medium text-[#1A202C]">
                 Nome do lote
               </label>
               <input
                 value={batchName}
                 onChange={(event) => setBatchName(event.target.value)}
                 placeholder="Ex: Holerites Marco 2026"
-                className="w-full rounded-2xl border border-[#ead8b1] bg-[#fffdf8] px-4 py-3 text-sm text-stone-800 outline-none transition-colors focus:border-[#ffbb3c]"
+                className="w-full rounded-lg border border-[#E6EAF0] bg-white px-4 py-3 text-sm text-[#1A202C] outline-none transition-colors focus:border-[#F59E0B] focus:ring-2 focus:ring-[#FFF7ED]"
               />
             </div>
 
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-stone-700">
+              <label className="mb-1.5 block text-sm font-medium text-[#1A202C]">
                 Template DOCX
               </label>
               <select
                 value={templateId}
                 onChange={(event) => setTemplateId(event.target.value)}
-                className="w-full rounded-2xl border border-[#ead8b1] bg-[#fffdf8] px-4 py-3 text-sm text-stone-800 outline-none transition-colors focus:border-[#ffbb3c]"
+                className="w-full rounded-lg border border-[#E6EAF0] bg-white px-4 py-3 text-sm text-[#1A202C] outline-none transition-colors focus:border-[#F59E0B] focus:ring-2 focus:ring-[#FFF7ED]"
               >
                 <option value="">Selecione um modelo</option>
                 {templates.map((template) => (
@@ -348,12 +350,12 @@ export default function Holerites() {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-stone-700">
+              <label className="mb-1.5 block text-sm font-medium text-[#1A202C]">
                 Arquivo CSV
               </label>
-              <label className="flex cursor-pointer items-center gap-3 rounded-2xl border-2 border-dashed border-[#ead8b1] bg-[#fffdf8] px-4 py-4 transition-colors hover:border-[#ffbb3c]">
-                <Files size={18} className="shrink-0 text-[#f49d16]" />
-                <span className="truncate text-sm text-stone-600">
+              <label className="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed border-[#E6EAF0] bg-[#F7F9FC] px-4 py-4 transition-colors hover:border-[#F59E0B]">
+                <Files size={18} className="shrink-0 text-[#F59E0B]" />
+                <span className="truncate text-sm text-[#4A5568]">
                   {csvFile ? csvFile.name : "Clique para selecionar o CSV"}
                 </span>
                 <input
@@ -366,8 +368,8 @@ export default function Holerites() {
             </div>
 
             {selectedTemplate && (
-              <div className="rounded-2xl border border-[#f3dfb1] bg-[#fff8e7] px-4 py-3 text-sm text-stone-600">
-                <div className="font-semibold text-stone-800">{selectedTemplate.name}</div>
+              <div className="rounded-lg border border-[#E6EAF0] bg-[#FFF7ED] px-4 py-3 text-sm text-[#4A5568]">
+                <div className="font-semibold text-[#1A202C]">{selectedTemplate.name}</div>
                 <div className="mt-1">
                   {selectedTemplate.fields.length} campo
                   {selectedTemplate.fields.length === 1 ? "" : "s"} detectado
@@ -377,7 +379,7 @@ export default function Holerites() {
             )}
 
             {importMutation.isError && (
-              <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-[#EF4444]">
                 {extractError(importMutation.error)}
               </div>
             )}
@@ -385,7 +387,7 @@ export default function Holerites() {
             <button
               onClick={handleImport}
               disabled={!batchName.trim() || !templateId || !csvFile || importMutation.isPending}
-              className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#ffd92a] to-[#ff9a16] px-5 py-3 text-sm font-semibold text-[#181511] shadow-[0_16px_36px_rgba(255,173,24,0.25)] transition-opacity hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#F59E0B] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#D97706] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {importMutation.isPending ? (
                 <Loader2 size={16} className="animate-spin" />
@@ -404,16 +406,17 @@ export default function Holerites() {
         />
       </div>
 
-      <section className="mt-8 rounded-[28px] border border-[#f2ddb2] bg-white/90 p-6 shadow-[0_22px_50px_rgba(17,17,17,0.04)]">
+      {/* Selected batch detail */}
+      <section className="mt-8 rounded-[10px] border border-[#E6EAF0] bg-white p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">
+            <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#A0AEC0]">
               Lote selecionado
             </div>
-            <h2 className="mt-1 text-2xl font-bold text-[#17120e]">
+            <h2 className="mt-1 text-2xl font-bold text-[#000]">
               {selectedBatch ? selectedBatch.name : "Selecione um lote"}
             </h2>
-            <p className="mt-2 text-sm text-stone-500">
+            <p className="mt-2 text-sm text-[#4A5568]">
               {selectedBatch
                 ? `${selectedBatch.template_name || "Template nao informado"} • importado em ${formatDate(selectedBatch.created_at)}`
                 : "Importe um CSV ou escolha um lote da lista para continuar."}
@@ -429,7 +432,7 @@ export default function Holerites() {
               </span>
               <button
                 onClick={() => queryClient.invalidateQueries({ queryKey: ["payroll-batch", selectedBatch.id] })}
-                className="inline-flex items-center gap-2 rounded-2xl border border-[#ead8b1] bg-[#fffdf8] px-4 py-2.5 text-sm font-medium text-stone-700 transition-colors hover:border-[#ffbb3c]"
+                className="inline-flex items-center gap-2 rounded-lg border border-[#E6EAF0] bg-white px-4 py-2.5 text-sm font-medium text-[#4A5568] transition-colors hover:bg-[#F9FAFB]"
               >
                 <RefreshCw size={15} />
                 Atualizar
@@ -439,13 +442,13 @@ export default function Holerites() {
         </div>
 
         {!selectedBatchId && !batchesLoading && (
-          <div className="mt-6 rounded-2xl border border-dashed border-[#ead8b1] bg-[#fffdf8] px-4 py-10 text-center text-sm text-stone-500">
+          <div className="mt-6 rounded-lg border border-dashed border-[#E6EAF0] bg-[#F7F9FC] px-4 py-10 text-center text-sm text-[#4A5568]">
             Nenhum lote selecionado.
           </div>
         )}
 
         {batchLoading && selectedBatchId && (
-          <div className="mt-6 flex items-center justify-center gap-3 rounded-2xl border border-dashed border-[#ead8b1] bg-[#fffdf8] px-4 py-10 text-sm text-stone-500">
+          <div className="mt-6 flex items-center justify-center gap-3 rounded-lg border border-dashed border-[#E6EAF0] bg-[#F7F9FC] px-4 py-10 text-sm text-[#4A5568]">
             <Loader2 size={18} className="animate-spin" />
             Carregando lote...
           </div>
@@ -453,35 +456,37 @@ export default function Holerites() {
 
         {selectedBatch && (
           <div className="mt-6 space-y-6">
+            {/* Stats row */}
             <div className="grid gap-4 md:grid-cols-4">
-              <div className="rounded-2xl border border-[#f1dfb4] bg-[#fffdf8] px-4 py-4">
-                <div className="text-xs uppercase tracking-[0.2em] text-stone-400">Linhas</div>
-                <div className="mt-2 text-2xl font-bold text-[#17120e]">{selectedBatch.total_rows}</div>
+              <div className="rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] px-4 py-4">
+                <div className="text-xs uppercase tracking-[0.2em] text-[#A0AEC0]">Linhas</div>
+                <div className="mt-2 text-2xl font-bold text-[#000]">{selectedBatch.total_rows}</div>
               </div>
-              <div className="rounded-2xl border border-[#f1dfb4] bg-[#fffdf8] px-4 py-4">
-                <div className="text-xs uppercase tracking-[0.2em] text-stone-400">Mapeadas</div>
-                <div className="mt-2 text-2xl font-bold text-[#17120e]">{mappedCount}</div>
+              <div className="rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] px-4 py-4">
+                <div className="text-xs uppercase tracking-[0.2em] text-[#A0AEC0]">Mapeadas</div>
+                <div className="mt-2 text-2xl font-bold text-[#000]">{mappedCount}</div>
               </div>
-              <div className="rounded-2xl border border-[#f1dfb4] bg-[#fffdf8] px-4 py-4">
-                <div className="text-xs uppercase tracking-[0.2em] text-stone-400">Geradas</div>
-                <div className="mt-2 text-2xl font-bold text-emerald-700">{selectedBatch.generated_rows}</div>
+              <div className="rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] px-4 py-4">
+                <div className="text-xs uppercase tracking-[0.2em] text-[#A0AEC0]">Geradas</div>
+                <div className="mt-2 text-2xl font-bold text-[#22C55E]">{selectedBatch.generated_rows}</div>
               </div>
-              <div className="rounded-2xl border border-[#f1dfb4] bg-[#fffdf8] px-4 py-4">
-                <div className="text-xs uppercase tracking-[0.2em] text-stone-400">Erros</div>
-                <div className="mt-2 text-2xl font-bold text-red-600">{selectedBatch.failed_rows}</div>
+              <div className="rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] px-4 py-4">
+                <div className="text-xs uppercase tracking-[0.2em] text-[#A0AEC0]">Erros</div>
+                <div className="mt-2 text-2xl font-bold text-[#EF4444]">{selectedBatch.failed_rows}</div>
               </div>
             </div>
 
+            {/* Mapping + Preview */}
             <div className="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
-              <section className="rounded-[24px] border border-[#f1dfb4] bg-[#fffdf8] p-5">
+              <section className="rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] p-5">
                 <div className="flex items-center justify-between gap-3">
                   <div>
-                    <h3 className="text-lg font-semibold text-[#17120e]">Mapeamento de colunas</h3>
-                    <p className="mt-1 text-sm text-stone-500">
+                    <h3 className="text-lg font-semibold text-[#000]">Mapeamento de colunas</h3>
+                    <p className="mt-1 text-sm text-[#4A5568]">
                       Defina qual coluna do CSV alimenta cada placeholder do template.
                     </p>
                   </div>
-                  <div className="rounded-full border border-[#f3dfb1] bg-white px-3 py-1 text-xs font-semibold text-[#9a5d00]">
+                  <div className="rounded-full bg-[#FFF7ED] px-3 py-1 text-xs font-semibold text-[#D97706]">
                     {selectedBatch.headers.length} coluna{selectedBatch.headers.length === 1 ? "" : "s"}
                   </div>
                 </div>
@@ -490,13 +495,13 @@ export default function Holerites() {
                   {selectedBatch.template_fields.map((field) => (
                     <div
                       key={field.key}
-                      className="grid gap-2 rounded-2xl border border-[#f1dfb4] bg-white px-4 py-3 lg:grid-cols-[1fr_0.9fr]"
+                      className="grid gap-2 rounded-lg border border-[#E6EAF0] bg-white px-4 py-3 lg:grid-cols-[1fr_0.9fr]"
                     >
                       <div>
-                        <div className="text-sm font-semibold text-stone-800">
+                        <div className="text-sm font-semibold text-[#1A202C]">
                           {field.display_label || field.label}
                         </div>
-                        <div className="mt-1 text-xs text-stone-500">{field.key}</div>
+                        <div className="mt-1 text-xs text-[#4A5568]">{field.key}</div>
                       </div>
                       <select
                         value={mapping[field.key] || ""}
@@ -506,7 +511,7 @@ export default function Holerites() {
                             [field.key]: event.target.value,
                           }))
                         }
-                        className="rounded-xl border border-[#ead8b1] bg-[#fffdf8] px-3 py-2.5 text-sm text-stone-700 outline-none transition-colors focus:border-[#ffbb3c]"
+                        className="rounded-lg border border-[#E6EAF0] bg-white px-3 py-2.5 text-sm text-[#4A5568] outline-none transition-colors focus:border-[#F59E0B] focus:ring-2 focus:ring-[#FFF7ED]"
                       >
                         <option value="">Nao mapear agora</option>
                         {selectedBatch.headers.map((header) => (
@@ -523,7 +528,7 @@ export default function Holerites() {
                   <button
                     onClick={() => mappingMutation.mutate()}
                     disabled={mappingMutation.isPending}
-                    className="inline-flex items-center gap-2 rounded-2xl border border-[#e7d19e] bg-white px-4 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[#ffbb3c] disabled:opacity-60"
+                    className="inline-flex items-center gap-2 rounded-lg border border-[#E6EAF0] bg-white px-4 py-2.5 text-sm font-semibold text-[#4A5568] transition-colors hover:bg-[#F9FAFB] disabled:opacity-60"
                   >
                     {mappingMutation.isPending ? (
                       <Loader2 size={15} className="animate-spin" />
@@ -536,7 +541,7 @@ export default function Holerites() {
                   <button
                     onClick={() => generateMutation.mutate()}
                     disabled={generateMutation.isPending || mappingMutation.isPending}
-                    className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#ffd92a] to-[#ff9a16] px-4 py-2.5 text-sm font-semibold text-[#181511] shadow-[0_16px_36px_rgba(255,173,24,0.22)] transition-opacity hover:opacity-95 disabled:opacity-60"
+                    className="inline-flex items-center gap-2 rounded-lg bg-[#F59E0B] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#D97706] disabled:opacity-60"
                   >
                     {generateMutation.isPending ? (
                       <Loader2 size={15} className="animate-spin" />
@@ -549,7 +554,7 @@ export default function Holerites() {
                   {selectedBatch.zip_ready && (
                     <button
                       onClick={handleDownloadZip}
-                      className="inline-flex items-center gap-2 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-sm font-semibold text-emerald-700 transition-colors hover:bg-emerald-100"
+                      className="inline-flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 px-4 py-2.5 text-sm font-semibold text-[#22C55E] transition-colors hover:bg-green-100"
                     >
                       <Download size={15} />
                       Baixar ZIP
@@ -558,33 +563,33 @@ export default function Holerites() {
                 </div>
 
                 {(mappingMutation.isError || generateMutation.isError || selectedBatch.last_error) && (
-                  <div className="mt-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  <div className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-[#EF4444]">
                     {selectedBatch.last_error ||
                       extractError(mappingMutation.error || generateMutation.error)}
                   </div>
                 )}
               </section>
 
-              <section className="rounded-[24px] border border-[#f1dfb4] bg-[#fffdf8] p-5">
+              <section className="rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] p-5">
                 <div className="flex items-center justify-between gap-3">
                   <div>
-                    <h3 className="text-lg font-semibold text-[#17120e]">Preview do lote</h3>
-                    <p className="mt-1 text-sm text-stone-500">
+                    <h3 className="text-lg font-semibold text-[#000]">Preview do lote</h3>
+                    <p className="mt-1 text-sm text-[#4A5568]">
                       Primeiras linhas importadas para conferência antes da geração.
                     </p>
                   </div>
                   {selectedBatch.preview_truncated && (
-                    <div className="inline-flex items-center gap-2 rounded-full border border-[#f3dfb1] bg-white px-3 py-1 text-xs font-semibold text-[#9a5d00]">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF7ED] px-3 py-1 text-xs font-semibold text-[#D97706]">
                       <AlertCircle size={13} />
                       Preview parcial
                     </div>
                   )}
                 </div>
 
-                <div className="mt-5 overflow-hidden rounded-2xl border border-[#ead8b1] bg-white">
+                <div className="mt-5 overflow-hidden rounded-lg border border-[#E6EAF0] bg-white">
                   <div className="overflow-x-auto">
                     <table className="min-w-full text-left text-sm">
-                      <thead className="bg-[#fff7e3] text-stone-600">
+                      <thead className="bg-[#F7F9FC] text-[#4A5568]">
                         <tr>
                           <th className="px-4 py-3 font-semibold">#</th>
                           <th className="px-4 py-3 font-semibold">Colaborador</th>
@@ -594,19 +599,19 @@ export default function Holerites() {
                       </thead>
                       <tbody>
                         {selectedBatch.preview_items.map((item) => (
-                          <tr key={item.id} className="border-t border-[#f4e8c8]">
-                            <td className="px-4 py-3 text-stone-500">{item.row_number}</td>
-                            <td className="px-4 py-3 font-medium text-stone-800">
+                          <tr key={item.id} className="border-t border-[#E6EAF0]">
+                            <td className="px-4 py-3 text-[#A0AEC0]">{item.row_number}</td>
+                            <td className="px-4 py-3 font-medium text-[#1A202C]">
                               {item.employee_label || "Nao identificado"}
                             </td>
                             <td className="px-4 py-3">
                               <span
                                 className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${
                                   item.status === "generated"
-                                    ? "bg-emerald-100 text-emerald-700"
+                                    ? "bg-green-50 text-[#22C55E]"
                                     : item.status === "failed"
-                                      ? "bg-red-100 text-red-700"
-                                      : "bg-slate-100 text-slate-700"
+                                      ? "bg-red-50 text-[#EF4444]"
+                                      : "bg-[#F7F9FC] text-[#A0AEC0]"
                                 }`}
                               >
                                 {item.status === "generated"
@@ -616,13 +621,13 @@ export default function Holerites() {
                                     : "Pendente"}
                               </span>
                             </td>
-                            <td className="px-4 py-3 text-xs leading-5 text-stone-500">
+                            <td className="px-4 py-3 text-xs leading-5 text-[#4A5568]">
                               {Object.entries(item.row_data)
                                 .slice(0, 3)
                                 .map(([key, value]) => `${key}: ${value || "—"}`)
                                 .join(" • ")}
                               {item.error_message ? (
-                                <div className="mt-1 text-red-600">{item.error_message}</div>
+                                <div className="mt-1 text-[#EF4444]">{item.error_message}</div>
                               ) : null}
                             </td>
                           </tr>
@@ -632,14 +637,14 @@ export default function Holerites() {
                   </div>
                 </div>
 
-                <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-stone-500">
+                <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-[#4A5568]">
                   <div className="inline-flex items-center gap-2">
                     <Clock3 size={15} />
                     Importado em {formatDate(selectedBatch.created_at)}
                   </div>
                   {selectedBatch.completed_at && (
                     <div className="inline-flex items-center gap-2">
-                      <CheckCircle2 size={15} className="text-emerald-600" />
+                      <CheckCircle2 size={15} className="text-[#22C55E]" />
                       Ultima geração em {formatDate(selectedBatch.completed_at)}
                     </div>
                   )}

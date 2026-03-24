@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CheckCircle, Download, FileCheck, Shield, XCircle } from "lucide-react";
 import {
@@ -25,18 +25,18 @@ const statusLabels: Record<string, string> = {
 };
 
 const statusStyles: Record<string, string> = {
-  generated: "bg-gray-100 text-gray-600",
-  sent: "bg-orange-50 text-orange-700",
-  pending: "bg-gray-100 text-gray-600",
+  generated: "bg-[#F7F9FC] text-[#A0AEC0]",
+  sent: "bg-[#FFF7ED] text-[#D97706]",
+  pending: "bg-[#F7F9FC] text-[#A0AEC0]",
   viewed: "bg-sky-50 text-sky-700",
-  in_signing: "bg-amber-50 text-amber-700",
+  in_signing: "bg-[#FFF7ED] text-[#D97706]",
   identity_confirmed: "bg-indigo-50 text-indigo-700",
   otp_verified: "bg-cyan-50 text-cyan-700",
-  signed: "bg-emerald-50 text-emerald-700",
-  completed: "bg-emerald-50 text-emerald-700",
-  refused: "bg-red-50 text-red-700",
-  expired: "bg-gray-100 text-gray-500",
-  cancelled: "bg-gray-100 text-gray-500",
+  signed: "bg-green-50 text-[#22C55E]",
+  completed: "bg-green-50 text-[#22C55E]",
+  refused: "bg-red-50 text-[#EF4444]",
+  expired: "bg-[#F7F9FC] text-[#A0AEC0]",
+  cancelled: "bg-[#F7F9FC] text-[#A0AEC0]",
 };
 
 export default function VerifyDocument() {
@@ -66,7 +66,7 @@ export default function VerifyDocument() {
   if (loading) {
     return (
       <PageShell>
-        <div className="py-16 text-center text-sm text-gray-400">
+        <div className="py-16 text-center text-sm text-[#A0AEC0]">
           Validando documento...
         </div>
       </PageShell>
@@ -77,9 +77,9 @@ export default function VerifyDocument() {
     return (
       <PageShell>
         <div className="py-16 text-center">
-          <XCircle size={52} className="mx-auto mb-4 text-red-500" />
-          <h2 className="text-xl font-bold text-gray-900">Codigo nao encontrado</h2>
-          <p className="mt-2 text-sm text-gray-500">{error ?? "Documento indisponivel."}</p>
+          <XCircle size={52} className="mx-auto mb-4 text-[#EF4444]" />
+          <h2 className="text-xl font-bold text-[#000]">Codigo nao encontrado</h2>
+          <p className="mt-2 text-sm text-[#4A5568]">{error ?? "Documento indisponivel."}</p>
         </div>
       </PageShell>
     );
@@ -91,22 +91,22 @@ export default function VerifyDocument() {
   return (
     <PageShell>
       <div className="space-y-6">
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="rounded-[10px] border border-[#E6EAF0] bg-white p-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <div className="flex flex-wrap items-center gap-3">
-                <h1 className="text-2xl font-bold text-gray-900">{data.document_title}</h1>
+                <h1 className="text-2xl font-bold text-[#000]">{data.document_title}</h1>
                 <span
                   className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                    statusStyles[data.status] ?? "bg-gray-100 text-gray-600"
+                    statusStyles[data.status] ?? "bg-[#F7F9FC] text-[#A0AEC0]"
                   }`}
                 >
                   {statusLabels[data.status] ?? data.status}
                 </span>
               </div>
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm text-[#4A5568]">
                 Codigo de verificacao{" "}
-                <span className="font-mono text-gray-700">{data.verification_code}</span>
+                <span className="font-mono text-[#1A202C]">{data.verification_code}</span>
               </p>
             </div>
 
@@ -122,12 +122,12 @@ export default function VerifyDocument() {
             <SummaryCard
               label="Criado em"
               value={formatDateTime(data.created_at)}
-              icon={<FileCheck size={16} className="text-orange-600" />}
+              icon={<FileCheck size={16} className="text-[#F59E0B]" />}
             />
             <SummaryCard
               label="Concluido em"
               value={data.completed_at ? formatDateTime(data.completed_at) : "Ainda em andamento"}
-              icon={<CheckCircle size={16} className="text-emerald-600" />}
+              icon={<CheckCircle size={16} className="text-[#22C55E]" />}
             />
             <SummaryCard
               label="Origem"
@@ -137,30 +137,30 @@ export default function VerifyDocument() {
             <SummaryCard
               label="Assinaturas"
               value={`${data.signed_signatories_count}/${data.signatories_count}`}
-              icon={<CheckCircle size={16} className="text-amber-600" />}
+              icon={<CheckCircle size={16} className="text-[#F59E0B]" />}
             />
           </div>
 
           {data.public_data_masked && (
-            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+            <div className="mt-4 rounded-lg border border-amber-200 bg-[#FFF7ED] px-4 py-3 text-sm text-[#D97706]">
               Dados pessoais sensiveis dos signatarios aparecem mascarados nesta consulta publica.
             </div>
           )}
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="rounded-[10px] border border-[#E6EAF0] bg-white p-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <h2 className="text-lg font-semibold text-gray-900">Integridade institucional</h2>
-              <p className="mt-1 text-sm text-gray-500">
+              <h2 className="text-lg font-semibold text-[#000]">Integridade institucional</h2>
+              <p className="mt-1 text-sm text-[#4A5568]">
                 Status da selagem final do PDF pela instituicao responsavel pela plataforma.
               </p>
             </div>
             <span
               className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
                 data.integrity.configured
-                  ? "bg-emerald-50 text-emerald-700"
-                  : "bg-amber-50 text-amber-700"
+                  ? "bg-green-50 text-[#22C55E]"
+                  : "bg-[#FFF7ED] text-[#D97706]"
               }`}
             >
               {data.integrity.configured ? "ICP institucional ativo" : "ICP institucional pendente"}
@@ -183,18 +183,18 @@ export default function VerifyDocument() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900">Hashes dos arquivos</h2>
+        <div className="rounded-[10px] border border-[#E6EAF0] bg-white p-6">
+          <h2 className="text-lg font-semibold text-[#000]">Hashes dos arquivos</h2>
           <div className="mt-4 space-y-3">
             {data.hashes.map((hash) => (
               <div
                 key={hash.id}
-                className="rounded-xl border border-gray-100 bg-gray-50 px-4 py-3"
+                className="rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] px-4 py-3"
               >
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <div className="text-sm font-medium text-gray-900">{hash.label}</div>
-                    <div className="mt-1 font-mono text-xs text-gray-500 break-all">
+                    <div className="text-sm font-medium text-[#000]">{hash.label}</div>
+                    <div className="mt-1 font-mono text-xs text-[#4A5568] break-all">
                       {hash.sha256}
                     </div>
                   </div>
@@ -207,27 +207,27 @@ export default function VerifyDocument() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900">Evidencias por signatario</h2>
+        <div className="rounded-[10px] border border-[#E6EAF0] bg-white p-6">
+          <h2 className="text-lg font-semibold text-[#000]">Evidencias por signatario</h2>
           <div className="mt-4 space-y-4">
             {data.signatories.map((signatory) => (
-              <div key={signatory.id} className="rounded-xl border border-gray-100 bg-gray-50 p-4">
+              <div key={signatory.id} className="rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] p-4">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
-                    <div className="text-base font-semibold text-gray-900">
+                    <div className="text-base font-semibold text-[#000]">
                       {signatory.name}
                       {signatory.role_label && (
-                        <span className="ml-2 text-sm font-normal text-gray-500">
+                        <span className="ml-2 text-sm font-normal text-[#4A5568]">
                           {signatory.role_label}
                         </span>
                       )}
                     </div>
-                    <div className="mt-1 text-sm text-gray-500">{signatory.email}</div>
+                    <div className="mt-1 text-sm text-[#4A5568]">{signatory.email}</div>
                   </div>
 
                   <span
                     className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                      statusStyles[signatory.status] ?? "bg-gray-100 text-gray-600"
+                      statusStyles[signatory.status] ?? "bg-[#F7F9FC] text-[#A0AEC0]"
                     }`}
                   >
                     {statusLabels[signatory.status] ?? signatory.status}
@@ -290,12 +290,12 @@ function SummaryCard({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
-      <div className="flex items-center gap-2 text-sm text-gray-500">
+    <div className="rounded-lg border border-[#E6EAF0] bg-[#F7F9FC] px-4 py-3">
+      <div className="flex items-center gap-2 text-sm text-[#4A5568]">
         {icon}
         {label}
       </div>
-      <div className="mt-2 text-sm font-medium text-gray-900">{value}</div>
+      <div className="mt-2 text-sm font-medium text-[#000]">{value}</div>
     </div>
   );
 }
@@ -311,8 +311,8 @@ function EvidenceItem({
 }) {
   return (
     <div className={fullWidth ? "md:col-span-2 xl:col-span-3" : ""}>
-      <div className="text-xs uppercase tracking-wide text-gray-400">{label}</div>
-      <div className="mt-1 text-sm text-gray-700 break-words">{value}</div>
+      <div className="text-xs uppercase tracking-wide text-[#A0AEC0]">{label}</div>
+      <div className="mt-1 text-sm text-[#4A5568] break-words">{value}</div>
     </div>
   );
 }
@@ -331,8 +331,8 @@ function DownloadButton({
       href={file.download_url}
       className={`inline-flex items-center gap-2 rounded-lg transition-colors ${
         compact
-          ? "bg-white px-3 py-2 text-sm font-medium text-orange-700 hover:bg-orange-50"
-          : "bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600"
+          ? "bg-white px-3 py-2 text-sm font-medium text-[#F59E0B] hover:bg-[#FFF7ED]"
+          : "bg-[#F59E0B] px-4 py-2 text-sm font-semibold text-white hover:bg-[#D97706]"
       }`}
     >
       <Download size={16} />
@@ -343,12 +343,12 @@ function DownloadButton({
 
 function PageShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#fff5b8,transparent_36%),linear-gradient(180deg,#fffdf7_0%,#fff7e6_100%)]">
-      <div className="border-b border-[#f0dfac] bg-white/88 shadow-sm backdrop-blur">
-        <div className="h-1 bg-gradient-to-r from-[#ffd92a] via-[#ffb31b] to-[#090909]" />
+    <div className="min-h-screen bg-[#F7F9FC]">
+      <div className="border-b border-[#E6EAF0] bg-white">
+        <div className="h-1 bg-[#F59E0B]" />
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-4">
           <PhSignLogo className="h-12 w-auto" />
-          <div className="text-right text-[11px] font-medium uppercase tracking-[0.2em] text-stone-400">
+          <div className="text-right text-[11px] font-medium uppercase tracking-[0.2em] text-[#A0AEC0]">
             verificacao publica
           </div>
         </div>
@@ -379,4 +379,3 @@ function extractError(err: unknown): string {
   }
   return "Erro de conexao.";
 }
-
