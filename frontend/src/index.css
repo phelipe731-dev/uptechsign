@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  --brand-ink: #090909;
+  --brand-ink-soft: #252525;
+  --brand-orange: #ff9a16;
+  --brand-orange-deep: #ff8a00;
+  --brand-gold: #ffd92a;
+  --brand-gold-soft: #fff7d1;
+  --brand-orange-soft: #fff1d9;
+  --brand-sand: #fffaf0;
+  --brand-border: #f0dfac;
+}
+
+body {
+  color: var(--brand-ink);
+  background:
+    radial-gradient(circle at top left, rgba(255, 217, 42, 0.18), transparent 34%),
+    radial-gradient(circle at top right, rgba(255, 154, 22, 0.08), transparent 28%),
+    linear-gradient(180deg, #fffdf7 0%, #fff7e7 100%);
+}
+
+.brand-panel {
+  border: 1px solid rgba(223, 191, 104, 0.35);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 45px rgba(34, 28, 12, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.brand-link {
+  color: var(--brand-orange-deep);
+}
+
+.brand-link:hover {
+  color: #c93e0d;
+}
+
+.bg-texture {
+  background-color: #fffaf0;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 191, 34, 0.18) 1px, transparent 0),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 247, 224, 0.96));
+  background-size: 24px 24px, 100% 100%;
+}

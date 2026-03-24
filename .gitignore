@@ -1,0 +1,43 @@
+# Storage
+storage/
+!storage/.gitkeep
+!storage/documents/.gitkeep
+!storage/signatures/.gitkeep
+!storage/payroll_batches/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Environment
+.env
+backend/.env
+certs/
+backups/
+ops/
+storage.__before_restore_*
+templates.__before_restore_*
+certs.__before_restore_*
+
+# IDE
+.vscode/
+.idea/
+.claude/
+Det/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+*.exe
+build/
+dist/

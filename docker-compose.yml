@@ -1,0 +1,76 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: detter
+      POSTGRES_PASSWORD: detter
+      POSTGRES_DB: detter
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U detter"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://detter:detter@postgres:5432/detter
+      SECRET_KEY: ${SECRET_KEY:-}
+      APP_ENV: ${APP_ENV:-development}
+      BASE_URL: ${BASE_URL:-http://localhost:3000}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:5173}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1}
+      TRUST_PROXY_HEADERS: ${TRUST_PROXY_HEADERS:-false}
+      LIBREOFFICE_PATH: soffice
+      DEBUG_EXPOSE_OTP: ${DEBUG_EXPOSE_OTP:-false}
+      INSTITUTIONAL_PFX_PATH: ${INSTITUTIONAL_PFX_PATH:-}
+      INSTITUTIONAL_PFX_PASSWORD: ${INSTITUTIONAL_PFX_PASSWORD:-}
+      INSTITUTIONAL_SIGNATURE_NAME: ${INSTITUTIONAL_SIGNATURE_NAME:-Uptech Sign}
+      INSTITUTIONAL_SIGNATURE_PROFILE: ${INSTITUTIONAL_SIGNATURE_PROFILE:-PAdES-B-B}
+    volumes:
+      - ./storage:/app/storage
+      - ./templates:/app/templates
+      - ./certs:/app/certs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health').read()\"",
+        ]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost/ >/dev/null 2>&1 || exit 1"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  pgdata:
